@@ -1,30 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
-public class Box {
+public class Box implements Comparable {
 
-    private List<Book> books;
+    private char letter;
 
-    public Box() {
-        this.books = new ArrayList<>();
+    public Box(char letter) {
+        this.letter = letter;
     }
 
-    public void pushBook(Book book) {
-        books.add(book);
+    public char getLetter() {
+        return letter;
     }
 
-    public void arrayListToString() {
-        for (int i = 0; i < books.size(); i++)
-            System.out.println(books.get(i));
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Box box = (Box) o;
+        return letter == box.letter;
     }
 
-    public void arrayListToStringWithInt(int posCount) {
-        for (int i = 0; i < posCount; i++)
-            if (posCount > books.size()) {
-                System.out.println("There are less elements in list than your number");
-                break;
-            } else {
-                System.out.println(books.get(i));
-            }
+    @Override
+    public int hashCode() {
+        return Objects.hash(letter);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.letter - ((Box)o).letter;
     }
 }
